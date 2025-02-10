@@ -87,8 +87,8 @@ def LinSEM_TS(T, T_c, S_list):
     Act, X = np.zeros((N, T), dtype=int), np.zeros((N, T))
     Reward, Freq_opt = np.zeros(T), np.zeros(T)
     for t in range(T):
-        if t in T_c:
-            S = S_list[T_c.index(t)]
+        if t == 0:
+            S = S_list[0]
             list_pa, list_pa_I = {}, {}
             for n in range(N):
                 list_pa[n] = list(np.where(S.B[:,n]!=0)[0])
@@ -101,6 +101,8 @@ def LinSEM_TS(T, T_c, S_list):
                 Vint[n] = np.eye(len(list_pa_I[n]))
                 gobs[n] = np.zeros((len(list_pa[n]), 1))
                 gint[n] = np.zeros((len(list_pa_I[n]), 1))
+        elif t in T_c[1:]:
+            S = S_list[T_c.index(t)]
         for n in range(N):
             if len(list_pa[n]) > 0:
                 B_tilde[n][list_pa[n]] = np.random.multivariate_normal(
@@ -178,7 +180,7 @@ def CSL_UCB(T, T_c, S_list, n_max=np.inf):
                     UpperB[a] = conf_bound(S, X[:,:t], Act[:,:t], T_i, Ba_hat, 
                                            Action[:,a], n_max)
                 if coef_init == 0:
-                    coef_init = 0.25 * max(Graph_mean)/max(UpperB)
+                    coef_init = 0.2 * max(Graph_mean)/max(UpperB)
                     coef = coef_init
                 else:
                     t_i = np.max(T_i)
