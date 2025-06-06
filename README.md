@@ -1,6 +1,6 @@
 # Asymmetric Graph Error Control with Low Complexity in Causal Bandits
 
-This repository contains the code and supplementary materials for ["Asymmetric Graph Error Control with Low Complexity in Causal Bandits"](https://ieeexplore.ieee.org/abstract/document/10976570).
+This repository contains the code and supplementary materials for the research paper ["Asymmetric Graph Error Control with Low Complexity in Causal Bandits"](https://ieeexplore.ieee.org/abstract/document/10976570).
 
 If you find it useful, please consider citing:
 ```bibtex
